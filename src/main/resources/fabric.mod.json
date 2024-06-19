@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "igttracker",
-  "version": "${version}",
+  "version": "1.1",
   "name": "IGTTracker",
   "description": "A mod to track in-game time and display it on the HUD.",
   "authors": ["Loefars"],
@@ -9,7 +9,7 @@
     "repo": "https://github.com/Loef/IGTTracker"
   },
   "license": "All-Rights-Reserved",
-  "icon": "assets/igttracker/icon.png",
+  "icon": "icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [

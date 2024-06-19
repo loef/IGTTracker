@@ -1,10 +1,10 @@
 package com.loefars.igttracker;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.util.WorldSavePath;
-import net.minecraft.world.level.storage.LevelStorage;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,12 +16,24 @@ public class PlaytimeTimer {
     private static long startTime;
     private static long savedTime = 0; // Total saved time in milliseconds
     private static boolean running = false;
+    private static boolean paused = false; // New flag for paused state
     private static Path savePath;
+
+    public static void initialize() {
+        ClientTickEvents.END_CLIENT_TICK.register(client -> {
+            if (client.isPaused() && running) {
+                pause();
+            } else if (!client.isPaused() && paused) {
+                resume();
+            }
+        });
+    }
 
     public static void start() {
         if (!running) {
             startTime = System.currentTimeMillis();
             running = true;
+            paused = false;
             System.out.println("Timer started.");
         }
     }
@@ -31,8 +43,28 @@ public class PlaytimeTimer {
             long endTime = System.currentTimeMillis();
             savedTime += endTime - startTime; // Accumulate elapsed time into savedTime
             running = false;
+            paused = false;
             System.out.println("Timer stopped. Total time saved: " + savedTime / 1000 + " seconds.");
             saveTimeAsync();
+        }
+    }
+
+    private static void pause() {
+        if (running) {
+            long pauseTime = System.currentTimeMillis();
+            savedTime += pauseTime - startTime;
+            paused = true;
+            running = false;
+            System.out.println("Timer paused. Total time saved: " + savedTime / 1000 + " seconds.");
+        }
+    }
+
+    private static void resume() {
+        if (paused) {
+            startTime = System.currentTimeMillis();
+            paused = false;
+            running = true;
+            System.out.println("Timer resumed.");
         }
     }
 
