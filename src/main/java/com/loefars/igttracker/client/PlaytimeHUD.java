@@ -1,6 +1,7 @@
 package com.loefars.igttracker.client;
 
 import com.loefars.igttracker.IGTTrackerClient;
+import com.loefars.igttracker.PlaytimeConfig;
 import com.loefars.igttracker.PlaytimeTimer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
@@ -36,7 +37,7 @@ public class PlaytimeHUD implements HudRenderCallback {
         float scaledTextWidth = (textWidth * scale);
         float xPos = IGTTrackerClient.CONFIG.xPos();
         float yPos = screenHeight - IGTTrackerClient.CONFIG.yPos();
-        boolean align = IGTTrackerClient.CONFIG.align();
+        PlaytimeConfig.Alignment align = IGTTrackerClient.CONFIG.align();
 
         // try {
         //     int color = Integer.parseInt(IGTTrackerClient.CONFIG.color(), 16);
@@ -56,7 +57,7 @@ public class PlaytimeHUD implements HudRenderCallback {
             drawContext.getMatrices().push();
             drawContext.getMatrices().scale(scale, scale, 1.0f);
 
-            if (!align) {
+            if ( align == PlaytimeConfig.Alignment.LEFT ) {
                 // Left-aligned text
                 drawContext.drawText(client.textRenderer, Text.literal(timeFormatted), (int) (xPos / scale), (int) (yPos / scale), color, true);
             } else {
@@ -71,7 +72,7 @@ public class PlaytimeHUD implements HudRenderCallback {
             drawContext.getMatrices().push();
             drawContext.getMatrices().scale(scale, scale, 1.0f);
 
-            if (!align) {
+            if ( align == PlaytimeConfig.Alignment.LEFT ) {
                 // Left-aligned text
                 drawContext.drawText(client.textRenderer, Text.literal(timeFormatted), (int) (xPos / scale), (int) (yPos / scale), 0xFF5555, true);
             } else {

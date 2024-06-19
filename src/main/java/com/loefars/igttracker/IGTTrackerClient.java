@@ -19,6 +19,8 @@ public class IGTTrackerClient implements ClientModInitializer {
     public void onInitializeClient() {
         System.out.println("Initializing IGTTrackerClient...");
 
+
+
         PlaytimeTimer.initialize(); // Initialize the timer to set up the tick event listener
 
         // Register key binding
