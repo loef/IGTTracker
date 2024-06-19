@@ -1,3 +1,9 @@
 {
-  "text.config.igttracker-config.option.color": "Color"
+  "text.config.igttracker-config.option.color": "Color",
+  "text.config.igttracker-config.option.scale": "Scale",
+  "text.config.igttracker-config.option.xPos": "X Position",
+  "text.config.igttracker-config.option.yPos": "Y Position",
+  "text.config.igttracker-config.option.align": "Alignment",
+  "text.config.igttracker-config.option.align.value.right": "Right",
+  "text.config.igttracker-config.option.align.value.left": "Left"
 }
