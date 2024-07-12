@@ -16,7 +16,3 @@ Simply join a world, either singleplayer or multiplayer, and the timer will star
 ## Configuration
 
 ![Config.png](docs%2FConfig.png)
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
